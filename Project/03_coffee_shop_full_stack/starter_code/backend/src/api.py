@@ -155,12 +155,12 @@ def unprocessable(error):
 
 
 @app.errorhandler(AuthError)
-def not_permitted(error):
+def auth_error(error):
     return jsonify({
         "success": False,
         "error": error.status_code,
         "message": error.error["description"]
-    }), 403
+    }), error.status_code
 
 
 @app.errorhandler(404)
